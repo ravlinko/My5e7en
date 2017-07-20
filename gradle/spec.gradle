@@ -1,0 +1,37 @@
+dependencies {
+    testCompile(
+            'org.fluentlenium:fluentlenium-junit:3.2.0',
+            'org.fluentlenium:fluentlenium-assertj:3.2.0',
+            'xml-apis:xml-apis:1.4.01',
+            'org.fluentlenium:fluentlenium-cucumber:3.2.0',
+            'org.seleniumhq.selenium:selenium-chrome-driver:3.4.0',
+            'info.cukes:cucumber-junit:1.2.5',
+            'info.cukes:cucumber-spring:1.2.5',
+            'info.cukes:cucumber-java:1.2.5',
+            'junit:junit:4.12'
+    )
+}
+
+sourceSets {
+    spec {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/spec/java')
+        }
+        resources.srcDir file('src/spec/resources')
+    }
+}
+
+configurations {
+    specCompile.extendsFrom testCompile
+    specRuntime.extendsFrom testRuntime
+}
+
+task spec(type: Test) {
+    testLogging.showStandardStreams = true
+    systemProperties['webdriver.chrome.driver'] = "src/spec/resources/driver/chromedriver_mac64"
+    testClassesDirs = sourceSets.spec.output.classesDirs
+    classpath = sourceSets.spec.runtimeClasspath
+    outputs.upToDateWhen { false }
+}

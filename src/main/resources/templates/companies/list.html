@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head data-th-fragment="header">
+    <meta charset="utf-8"/>
+    <title data-th-text="#{companies.list.page.title}">Title</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <table class="table">
+        <caption data-th-text="#{companies.list.table.title}">Table title</caption>
+        <thead class="thead-inverse">
+        <tr>
+            <th scope="col" data-th-text="#{companies.list.id.label}">ID</th>
+            <th scope="col" data-th-text="#{companies.list.name.label}">Name</th>
+            <th scope="col" data-th-text="#{companies.list.email.label}">e-mail</th>
+            <th scope="col" data-th-text="#{companies.list.address.label}">Address</th>
+            <th scope="col" data-th-text="#{companies.list.actions.label}">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="company : ${companies}">
+            <td><a href="#" data-th-text="${company.id}">1</a></td>
+            <td data-th-text="${company.name}">Name</td>
+            <td data-th-text="${company.email}">company@localhost</td>
+            <td data-th-text="${company.address}">US, NYC</td>
+            <td><a class="btn btn-warning" data-th-href="@{|/companies/${company.id}/edit|}" data-th-text="#{edit.button.label}">edit</a></td>
+        </tr>
+        <tr data-th-remove="all">
+            <td>2</td>
+            <td>Bigger Company</td>
+            <td>big.company@localhost</td>
+            <td>US, NYC</td>
+            <td><a href="#">edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="#" data-th-href="@{/companies/create}" data-th-text="#{companies.list.create.label}">Create company</a>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

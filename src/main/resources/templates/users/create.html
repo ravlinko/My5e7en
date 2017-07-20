@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head data-th-fragment="header">
+    <meta charset="utf-8"/>
+    <title data-th-text="#{users.register.page.title}">temp title</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <h1 data-th-text="#{users.register.head.title}">Register user</h1>
+
+    <form action="#" data-th-action="@{/user/create}" data-th-object="${form}" method="post">
+        <div th:replace="users/_form :: form"/>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

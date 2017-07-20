@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head data-th-fragment="header">
+    <meta charset="utf-8"/>
+    <title data-th-text="#{reports.list.page.title}">Title</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div th:replace="reports/_table :: table"/>
+    <a class="btn btn-success" href="#" data-th-href="@{/reports/create}" data-th-text="#{reports.list.create.label}">Create report</a>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

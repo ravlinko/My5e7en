@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#my5e7en-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" th:href="@{/}">My 5e7en</a>
+            </div>
+            <div id="my5e7en-navbar-collapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+                    <li><a th:href="@{/users}">Users</a></li>
+                    <li><a th:href="@{/companies}">Companies</a></li>
+                    <li><a th:href="@{/reports}">Reports</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a sec:authorize="isAnonymous()" href="#" data-th-href="@{/login}"
+                           data-th-text="#{signin.button.label}">Sign in</a>
+                    </li>
+                    <li class="dropdown" sec:authorize="isAuthenticated()">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            <span sec:authentication="name"/>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <form class="form-group" th:action="@{/logout}" method="post">
+                                    <button class="btn btn-default center-block" type="submit"
+                                            data-th-text="#{signout.button.label}"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>

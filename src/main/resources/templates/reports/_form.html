@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="form">
+    <caption data-th-text="#{reports.edit.form.title}">Add Title</caption>
+
+    <div class="form-group">
+        <label data-th-text="#{reports.list.name.label}">Report name</label>
+        <input type="text" data-th-value="*{name}" data-th-field="*{name}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{reports.list.data.label}">Report data</label>
+        <textarea type="text" data-th-value="*{data}" data-th-field="*{data}"
+                  class="form-control"/>
+    </div>
+    <button class="btn btn-success form-control" type="submit" name="action"
+            data-th-text="#{create.button.label}">
+        Save
+    </button>
+</div>
+
+</body>
+</html>

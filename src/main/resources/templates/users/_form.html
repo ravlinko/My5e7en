@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="form">
+    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+    </div>
+    <caption data-th-text="#{users.edit.form.title}">Add Title</caption>
+
+    <div class="form-group">
+        <label data-th-text="#{users.list.firstname.label}">First name</label>
+        <input type="text" data-th-value="*{firstName}" data-th-field="*{firstName}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.list.lastname.label}">Last name</label>
+        <input type="text" data-th-value="*{lastName}" data-th-field="*{lastName}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.list.email.label}">e-mail</label>
+        <input type="text" data-th-value="*{email}" data-th-field="*{email}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.list.phone.label}">Phone</label>
+        <input type="text" data-th-value="*{phone}" data-th-field="*{phone}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.list.role.label}" >Role</label>
+        <select class="form-control" data-th-value="*{role}" data-th-field="*{role}">
+            <option th:each="state : ${T(com.my5e7en.web.my5e7en.entity.SecurityRole).values()}"
+                    th:value="${state}"
+                    th:text="${state}">
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.edit.password.label}">Password</label>
+        <input type="password" data-th-value="*{password}" data-th-field="*{password}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label data-th-text="#{users.edit.repeadpassword.label}">Re-enter password</label>
+        <input type="password" data-th-value="*{passwordRepeated}"
+               data-th-field="*{passwordRepeated}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <div th:replace="reports/_table :: table"/>
+        <a class="btn btn-success" href="#" data-th-href="@{/reports/create}" data-th-text="#{reports.list.create.label}">Create report</a>
+    </div>
+
+    <button class="btn btn-primary form-control" type="submit" name="action"
+            data-th-text="#{create.button.label}">
+        Save
+    </button>
+</div>
+
+</body>
+</html>

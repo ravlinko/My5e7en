@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="table">
+    <table class="table">
+        <caption data-th-text="#{users.list.table.title}">Table title</caption>
+        <thead class="thead-inverse">
+        <tr>
+            <th scope="col" data-th-text="#{users.list.id.label}">ID</th>
+            <th scope="col" data-th-text="#{users.list.firstname.label}">First name</th>
+            <th scope="col" data-th-text="#{users.list.lastname.label}">Second name</th>
+            <th scope="col" data-th-text="#{users.list.email.label}">e-mail</th>
+            <th scope="col" data-th-text="#{users.list.phone.label}">Phone</th>
+            <th scope="col" data-th-text="#{users.list.role.label}">Role</th>
+            <th scope="col" data-th-text="#{users.list.actions.label}">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="user : ${users}">
+            <td><a href="#" data-th-text="${user.id}">1</a></td>
+            <td data-th-text="${user.firstName}">John</td>
+            <td data-th-text="${user.lastName}">Doe</td>
+            <td data-th-text="${user.email}">demo@localhost</td>
+            <td data-th-text="${user.phone}">0001</td>
+            <td data-th-text="${user.role}">ADMIN</td>
+            <td><a class="btn btn-warning" data-th-href="@{|/user/${user.id}/edit|}"
+                   data-th-text="#{edit.button.label}">Edit</a></td>
+        </tr>
+        <tr data-th-remove="all">
+            <td>2</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>demo@localhost</td>
+            <td>0001</td>
+            <td>ADMIN</td>
+            <td><a href="#">edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

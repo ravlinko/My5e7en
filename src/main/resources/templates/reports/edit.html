@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head data-th-fragment="header">
+    <meta charset="utf-8"/>
+    <title data-th-text="#{reports.edit.page.title}">temp title</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <h1 data-th-text="#{reports.edit.head.title}">New report</h1>
+
+    <form action="#" data-th-action="@{|/reports/*{id}|}" data-th-object="${form}" method="post">
+        <div th:replace="reports/_form :: form"/>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
