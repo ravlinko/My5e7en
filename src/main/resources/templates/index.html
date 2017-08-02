@@ -16,6 +16,9 @@
     <div class="page-header">
         <h1>Dashboard</h1>
     </div>
+    <div data-th-object="${user}">
+        <div th:replace="users/_view :: view"/>
+    </div>
 
     <div th:replace="reports/_table :: table"/>
 </div>

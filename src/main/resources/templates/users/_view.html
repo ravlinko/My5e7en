@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+<div th:fragment="view">
+
+    <div class="container">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>ID</td>
+                <td data-th-text="${user.id}">1</td>
+            </tr>
+            <tr>
+                <td>First name</td>
+                <td id="firstName" data-th-text="${user.firstName}">John</td>
+            </tr>
+            <tr>
+                <td>Last name</td>
+                <td id="lastName" data-th-text="${user.lastName}">Doe</td>
+            </tr>
+            <tr>
+                <td>e-mail</td>
+                <td id="email" data-th-text="${user.email}">demo@localhost</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td id="phone" data-th-text="${user.phone}">0001</td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td id="role" data-th-text="${user.role}">ADMIN</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a class="btn btn-warning" data-th-href="@{|/user/${user.id}/edit|}" data-th-text="#{edit.button.label}">Edit</a></td>
+            </tr>
+            </tbody>
+            <caption>Profile</caption>
+        </table>
+
+    </div>
+
+</div>
+</body>
+</html>

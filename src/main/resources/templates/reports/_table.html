@@ -23,7 +23,7 @@
         <tbody>
         <tr data-th-each="report : ${reports}">
             <td><a href="#" data-th-text="${report.id}">1</a></td>
-            <td data-th-text="${report.name}">John</td>
+            <td class="reportNameCell" data-th-text="${report.name}">John</td>
             <td data-th-text="${report.data}">Doe</td>
             <td data-th-text="${report.time}">demo@localhost</td>
             <td><a class="btn btn-warning" data-th-href="@{|/reports/${report.id}/edit|}" data-th-text="#{edit.button.label}">edit</a></td>

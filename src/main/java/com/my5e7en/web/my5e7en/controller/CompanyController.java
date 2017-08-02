@@ -36,7 +36,7 @@ public class CompanyController extends DefaultMy5evenController<CompanyCreateFor
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@Valid @ModelAttribute("form") CompanyCreateFormDto form) {
+	public String create(@ModelAttribute("form") CompanyCreateFormDto form) {
 		getService().create(form);
 		return "redirect:/companies";
 	}

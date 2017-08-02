@@ -24,16 +24,20 @@
                 <a class="navbar-brand" th:href="@{/}">My 5e7en</a>
             </div>
             <div id="my5e7en-navbar-collapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+                <ul id="navigationGroup" class="nav navbar-nav" sec:authorize="isAuthenticated()">
                     <li><a th:href="@{/users}">Users</a></li>
                     <li><a th:href="@{/companies}">Companies</a></li>
                     <li><a th:href="@{/reports}">Reports</a></li>
-
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+
+                <ul id="userNavigationGroup" class="nav navbar-nav navbar-right">
                     <li>
                         <a sec:authorize="isAnonymous()" href="#" data-th-href="@{/login}"
                            data-th-text="#{signin.button.label}">Sign in</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" href="#" data-th-href="@{/user/registration}"
+                           data-th-text="#{signup.button.label}">Sign up</a>
                     </li>
                     <li class="dropdown" sec:authorize="isAuthenticated()">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -45,7 +49,7 @@
                             <li role="separator" class="divider"></li>
                             <li>
                                 <form class="form-group" th:action="@{/logout}" method="post">
-                                    <button class="btn btn-default center-block" type="submit"
+                                    <button id="navLogOutButton" class="btn btn-default center-block" type="submit"
                                             data-th-text="#{signout.button.label}"/>
                                 </form>
                             </li>

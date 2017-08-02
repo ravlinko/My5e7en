@@ -27,7 +27,7 @@
             <td><a href="#" data-th-text="${user.id}">1</a></td>
             <td data-th-text="${user.firstName}">John</td>
             <td data-th-text="${user.lastName}">Doe</td>
-            <td data-th-text="${user.email}">demo@localhost</td>
+            <td class="userEmailCell" data-th-text="${user.email}">demo@localhost</td>
             <td data-th-text="${user.phone}">0001</td>
             <td data-th-text="${user.role}">ADMIN</td>
             <td><a class="btn btn-warning" data-th-href="@{|/user/${user.id}/edit|}"

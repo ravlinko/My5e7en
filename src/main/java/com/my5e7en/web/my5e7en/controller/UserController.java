@@ -1,6 +1,7 @@
 package com.my5e7en.web.my5e7en.controller;
 
 import com.my5e7en.web.my5e7en.controller.dto.UserCreateFormDto;
+import com.my5e7en.web.my5e7en.controller.dto.UserDto;
 import com.my5e7en.web.my5e7en.controller.validator.UserCreateFormValidator;
 import com.my5e7en.web.my5e7en.entity.User;
 import com.my5e7en.web.my5e7en.service.UserService;
@@ -86,5 +87,25 @@ public class UserController {
 	public String edit(@PathVariable Long id, @ModelAttribute("form") UserCreateFormDto form) {
 		userService.update(id, form);
 		return "redirect:/users";
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public ModelAndView registrationPage() {
+		UserCreateFormDto newUser = new UserCreateFormDto();
+		return new ModelAndView("registration", "form", newUser);
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String signUp(@Valid @ModelAttribute("form") UserCreateFormDto user, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "registration";
+		}
+		try {
+			userService.create(user);
+		} catch (DataIntegrityViolationException e) {
+			bindingResult.reject("email.exists", "Email already exists");
+			return "registration";
+		}
+		return "redirect:/";
 	}
 }
