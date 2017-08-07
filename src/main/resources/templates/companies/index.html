@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head data-th-fragment="header">
+    <meta charset="utf-8"/>
+    <title data-th-text="#{companies.list.page.title}">Title</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div sec:authorize="hasAuthority('COMPANY_OWNER')">
+        <div th:replace="companies/_view :: table"/>
+    </div>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <div th:replace="companies/_table :: table"/>
+        <a name="createCompanyButton" class="btn btn-success" href="#" data-th-href="@{/companies/create}"
+           data-th-text="#{companies.view.create.label}">Create company</a>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

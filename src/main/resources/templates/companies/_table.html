@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="table">
+    <table class="table">
+        <caption data-th-text="#{companies.list.table.title}">Table title</caption>
+        <thead class="thead-inverse">
+        <tr>
+            <th scope="col" data-th-text="#{companies.list.id.label}">ID</th>
+            <th scope="col" data-th-text="#{companies.list.name.label}">Name</th>
+            <th scope="col" data-th-text="#{companies.list.email.label}">e-mail</th>
+            <th scope="col" data-th-text="#{companies.list.address.label}">Address</th>
+            <th scope="col" data-th-text="#{companies.list.actions.label}">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="company : ${companies}">
+            <td><a href="#" data-th-text="${company.id}">1</a></td>
+            <td class="companyNameCell" data-th-text="${company.name}">Name</td>
+            <td data-th-text="${company.email}">company@localhost</td>
+            <td data-th-text="${company.address}">US, NYC</td>
+            <td><a class="btn btn-warning" data-th-href="@{|/companies/${company.id}/edit|}" data-th-text="#{edit.button.label}">edit</a></td>
+        </tr>
+        <tr data-th-remove="all">
+            <td>2</td>
+            <td>Bigger Company</td>
+            <td>big.company@localhost</td>
+            <td>US, NYC</td>
+            <td><a href="#">edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

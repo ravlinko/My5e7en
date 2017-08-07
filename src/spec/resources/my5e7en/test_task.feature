@@ -9,7 +9,7 @@ Feature: Seven company test task requirements
     And fill out form at registration page
       | firstName        | John                   |
       | lastName         | Kalem                  |
-      | email            | jkalem@greengarden.com |
+      | email            | jkalem@cherystreet.com |
       | phone            | 099 999 02 03          |
       | password         | jkalem                 |
       | passwordRepeated | jkalem                 |
@@ -26,7 +26,7 @@ Feature: Seven company test task requirements
     And fill out form at registration page
       | firstName        | Jeremy                  |
       | lastName         | Jonson                  |
-      | email            | jjonson@greengarden.com |
+      | email            | jjonson@cherystreet.com |
       | phone            | 099 999 02 04           |
       | password         | jjonson                 |
       | passwordRepeated | jjonson                 |
@@ -36,12 +36,12 @@ Feature: Seven company test task requirements
       """
       New user John Kalem has been created
       """
-    And jjonson@greengarden.com user is logging in with password jjonson
+    And jjonson@cherystreet.com user is logging in with password jjonson
     When a dashboard page is opened
     And dashboard page contains
       | firstName | Jeremy                  |
       | lastName  | Jonson                  |
-      | email     | jjonson@greengarden.com |
+      | email     | jjonson@cherystreet.com |
       | phone     | 099 999 02 04           |
 
 
@@ -93,7 +93,7 @@ Feature: Seven company test task requirements
     And fill out form at create user page
       | firstName        | Derek              |
       | lastName         | Tailor             |
-      | email            | dtailor@jbuild.com |
+      | email            | dtailor@cherystreet.com |
       | phone            | 0999999999         |
       | password         | dpassword          |
       | passwordRepeated | dpassword          |
@@ -103,7 +103,7 @@ Feature: Seven company test task requirements
       """
       New user Derek Tailor has been created
       """
-    And users table contains new user with email "dtailor@jbuild.com"
+    And users table contains new user with email "dtailor@cherystreet.com"
 
   @success_flow @condition2 @admin @reports
   Scenario: admin user should be able to view companies reports
@@ -111,14 +111,13 @@ Feature: Seven company test task requirements
     And admin user is logging in with password www
     When a reports page is opened
     Then reports table contains reports with names
-      | Green Garden inc. 2017 May month report |
       | Red Dragon inc. 2017 May month report   |
       | Chery Street inc. 2017 May month report |
 
   @success_flow @condition2 @company_owner @application
   Scenario: company owner should have access to all tabs
     Given a login page is opened
-    And jkelly@solidcircle.com user is logging in with password www
+    And jkelly@jkassistance.com user is logging in with password www
     Then a dashboard page is opened
     And navigation panel is available
     And there are available tabs
@@ -129,7 +128,7 @@ Feature: Seven company test task requirements
   @success_flow @condition2 @restriction1 @company_owner @company
   Scenario: company owner should be able to view his company
     Given a login page is opened
-    And jkelly@solidcircle.com user is logging in with password www
+    And jkelly@jkassistance.com user is logging in with password www
     When a companies page is opened
     Then company JK Assistance inc. view page is opened
     And company edit button is present and active

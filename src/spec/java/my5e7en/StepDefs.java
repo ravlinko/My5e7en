@@ -5,6 +5,7 @@ import com.my5e7en.web.my5e7en.My5e7enApplication;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
@@ -195,6 +196,8 @@ public class StepDefs extends FluentCucumberTest {
 
 	@Then("^company ([^\"]*) view page is opened$")
 	public void company_JK_Assistance_inc_view_page_is_opened(final String companyName) {
+		final FluentList<FluentWebElement> companyViewComponent = companiesPage.$(By.className("companyViewComponent"));
+		assertTrue(companyViewComponent.one().present());
 	}
 
 	@Then("^([^\"]*) button is present and active$")
