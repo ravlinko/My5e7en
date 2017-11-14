@@ -1,5 +1,7 @@
 package com.my5e7en.web.my5e7en.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -16,8 +18,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 @Table(name = "REPORT")
+@Data
+@EqualsAndHashCode
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,44 +47,6 @@ public class Report {
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Report setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public Report setData(String data) {
-		this.data = data;
-		return this;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	public User getOwner() {
-		return owner;
-	}
-
 	public Report setOwner(User owner) {
 		this.owner = owner;
 		if (!owner.getReports().contains(this)) {
@@ -101,23 +68,5 @@ public class Report {
 			company.addReport(this);
 		}
 		return this;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Report)) return false;
-
-		Report report = (Report) o;
-
-		if (!getId().equals(report.getId())) return false;
-		return getName().equals(report.getName());
-	}
-
-	@Override
-	public int hashCode() {
-		int result = getId().hashCode();
-		result = 31 * result + getName().hashCode();
-		return result;
 	}
 }

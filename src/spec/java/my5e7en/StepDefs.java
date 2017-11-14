@@ -78,7 +78,7 @@ public class StepDefs extends FluentCucumberTest {
 
 	@Override
 	public WebDriver newWebDriver() {
-		System.setProperty("webdriver.chrome.driver", "src/spec/resources/driver/chromedriver_mac64");
+		System.setProperty("webdriver.chrome.driver", "src/spec/resources/driver/chromedriver_win32");
 		return new ChromeDriver();
 	}
 

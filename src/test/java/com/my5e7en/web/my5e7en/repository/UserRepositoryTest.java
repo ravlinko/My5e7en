@@ -2,7 +2,6 @@ package com.my5e7en.web.my5e7en.repository;
 
 import com.my5e7en.web.my5e7en.entity.SecurityRole;
 import com.my5e7en.web.my5e7en.entity.User;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,36 +16,36 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class UserRepositoryTest {
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Test
-	public void shouldFindOneUserByEmail() throws Exception {
-		final User savedUser = userRepository.save(new User()
-				.setFirstName("John" )
-				.setLastName("Doe" )
-				.setPhone("0000000000" )
-				.setEmail("admin@unittest" )
-				.setPassword(new BCryptPasswordEncoder().encode("admin" ))
-				.setRole(SecurityRole.ADMIN)
-		);
-		userRepository.save(new User()
-				.setFirstName("Jessica" )
-				.setLastName("Doe" )
-				.setPhone("0000000001" )
-				.setEmail("employee@unittest" )
-				.setPassword(new BCryptPasswordEncoder().encode("employee" ))
-				.setRole(SecurityRole.COMPANY_EMPLOYER)
-		);
+    @Test
+    public void shouldFindOneUserByEmail() throws Exception {
+        User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setPhone("0000000000");
+        user.setEmail("admin@unittest");
+        user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+        user.setRole(SecurityRole.ADMIN);
+        final User savedUser = userRepository.save(user);
 
-		User retrievedUser = userRepository.findOneByEmail("admin@unittest" );
+        user.setFirstName("Jessica");
+        user.setLastName("Doe");
+        user.setPhone("0000000001");
+        user.setEmail("employee@unittest");
+        user.setPassword(new BCryptPasswordEncoder().encode("employee"));
+        user.setRole(SecurityRole.COMPANY_EMPLOYER);
+        userRepository.save(user);
 
-		System.out.println(new BCryptPasswordEncoder().encode("demo@localhost"));
-		System.out.println(new BCryptPasswordEncoder().encode("john@localhost"));
+        User retrievedUser = userRepository.findOneByEmail("admin@unittest");
 
-		System.out.println(new BCryptPasswordEncoder().matches("john@localhost", new BCryptPasswordEncoder().encode("john@localhost")));
+        System.out.println(new BCryptPasswordEncoder().encode("demo@localhost"));
+        System.out.println(new BCryptPasswordEncoder().encode("john@localhost"));
 
-		assertThat(savedUser, is(equalTo(retrievedUser)));
-	}
+        System.out.println(new BCryptPasswordEncoder().matches("john@localhost", new BCryptPasswordEncoder().encode("john@localhost")));
+
+        assertThat(savedUser, is(equalTo(retrievedUser)));
+    }
 
 }
