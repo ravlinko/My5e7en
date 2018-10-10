@@ -1,11 +1,17 @@
 package my5e7en;
 
 import com.my5e7en.web.my5e7en.My5e7enApplication;
-
+import cucumber.api.DataTable;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import my5e7en.page.*;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
@@ -19,27 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import my5e7en.page.CompaniesPage;
-import my5e7en.page.CompanyCreatePage;
-import my5e7en.page.CreateUserPage;
-import my5e7en.page.DashboardPage;
-import my5e7en.page.HealthPage;
-import my5e7en.page.LoginPage;
-import my5e7en.page.RegistrationPage;
-import my5e7en.page.ReportsPage;
-import my5e7en.page.UsersPage;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 @ContextConfiguration
@@ -78,7 +65,6 @@ public class StepDefs extends FluentCucumberTest {
 
 	@Override
 	public WebDriver newWebDriver() {
-		System.setProperty("webdriver.chrome.driver", "src/spec/resources/driver/chromedriver_win32");
 		return new ChromeDriver();
 	}
 
@@ -122,9 +108,7 @@ public class StepDefs extends FluentCucumberTest {
 	@Given("^fill out form at ([^\"]*) page$")
 	public void fill_out_form(final String pageName, final Map<String, String> form) {
 		final FluentPage page = sitePages.get(pageName);
-		form.forEach((k, v) -> {
-			page.el(By.id(k)).write(v);
-		});
+		form.forEach((k, v) -> page.el(By.id(k)).write(v));
 		page.takeScreenShot();
 	}
 
@@ -141,7 +125,7 @@ public class StepDefs extends FluentCucumberTest {
 	}
 
 	@Given("^([^\"]*) user is logging in with password ([^\"]*)")
-	public void user_is_logging_in_with_password(final String login, final String password) throws InterruptedException {
+	public void user_is_logging_in_with_password(final String login, final String password) {
 		final FluentPage page = sitePages.get("login");
 		page.switchTo();
 		page.$(By.id("username")).write(login);
