@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
+import java.util.Collections;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -20,16 +20,18 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    public void shouldFindOneUserByEmail() throws Exception {
-        User user = new User();
-        user.setFirstName("John");
-        user.setLastName("Doe");
-        user.setPhone("0000000000");
-        user.setEmail("admin@unittest");
-        user.setPassword(new BCryptPasswordEncoder().encode("admin"));
-        user.setRole(SecurityRole.ADMIN);
-        final User savedUser = userRepository.save(user);
+    public void shouldFindOneUserByEmail() {
+        User admin = new User();
+        admin.setFirstName("John");
+        admin.setLastName("Doe");
+        admin.setPhone("0000000000");
+        admin.setEmail("admin@unittest");
+        admin.setPassword(new BCryptPasswordEncoder().encode("admin"));
+        admin.setRole(SecurityRole.ADMIN);
+        admin.setReports(Collections.emptyList());
+        final User savedAdmin = userRepository.save(admin);
 
+        User user = new User();
         user.setFirstName("Jessica");
         user.setLastName("Doe");
         user.setPhone("0000000001");
@@ -38,14 +40,14 @@ public class UserRepositoryTest {
         user.setRole(SecurityRole.COMPANY_EMPLOYER);
         userRepository.save(user);
 
-        User retrievedUser = userRepository.findOneByEmail("admin@unittest");
+        User retrievedAdmin = userRepository.findOneByEmail("admin@unittest");
 
-        System.out.println(new BCryptPasswordEncoder().encode("demo@localhost"));
-        System.out.println(new BCryptPasswordEncoder().encode("john@localhost"));
-
-        System.out.println(new BCryptPasswordEncoder().matches("john@localhost", new BCryptPasswordEncoder().encode("john@localhost")));
-
-        assertThat(savedUser, is(equalTo(retrievedUser)));
+        assertEquals("First name", savedAdmin.getFirstName(), retrievedAdmin.getFirstName());
+        assertEquals("Last name", savedAdmin.getLastName(), retrievedAdmin.getLastName());
+        assertEquals("Phone", savedAdmin.getPhone(), retrievedAdmin.getPhone());
+        assertEquals("Email", savedAdmin.getEmail(), retrievedAdmin.getEmail());
+        assertEquals("Password", savedAdmin.getPassword(), retrievedAdmin.getPassword());
+        assertEquals("User role", savedAdmin.getRole(), retrievedAdmin.getRole());
     }
 
 }
